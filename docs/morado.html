@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipo Morado - CTF Virtual</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body class="morado">
+    <div class="container">
+        <h1 class="titulo">Equipo Morado</h1>
+        <div class="tabla-container">
+            <h2>Tabla de Puntajes</h2>
+            <table id="tabla-puntajes"></table>
+        </div>
+
+        <div class="flags">
+            <h2>Ingresar Flags</h2>
+            <form id="flagForm">
+                <label for="flag1">Flag 1:</label><br>
+                <input type="text" id="flag1"><br>
+                <button type="button" id="btn-flag1" class="flag-btn">Verificar Flag 1</button><br>
+                <span id="flag1-resultado"></span><br><br>
+
+                <label for="flag2">Flag 2:</label><br>
+                <input type="text" id="flag2"><br>
+                <button type="button" id="btn-flag2" class="flag-btn">Verificar Flag 2</button><br>
+                <span id="flag2-resultado"></span><br><br>
+
+                <label for="flag3">Flag 3:</label><br>
+                <input type="text" id="flag3"><br>
+                <button type="button" id="btn-flag3" class="flag-btn">Verificar Flag 3</button><br>
+                <span id="flag3-resultado"></span><br><br>
+
+                <label for="flag4">Flag 4:</label><br>
+                <input type="text" id="flag4"><br>
+                <button type="button" id="btn-flag4" class="flag-btn">Verificar Flag 4</button><br>
+                <span id="flag4-resultado"></span><br><br>
+
+                <label for="flag5">Flag 5:</label><br>
+                <input type="text" id="flag5"><br>
+                <button type="button" id="btn-flag5" class="flag-btn">Verificar Flag 5</button><br>
+                <span id="flag5-resultado"></span><br><br>
+            </form>
+        </div>
+    </div>
+
+    <script src="scripts/morado.js"></script>
+    <script src="scripts/tabla.js"></script>
+    <script src="scripts/puntosm.js"></script>
+</body>
+</html>

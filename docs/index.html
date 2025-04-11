@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Virtual - Página Principal</title>
+    <link rel="stylesheet" href="styles/in.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenidos al CTF Virtual</h1>
+        <p>Ingrese la contraseña para acceder a su equipo.</p>
+        <form id="loginForm">
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" required>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var password = document.getElementById('password').value.toLowerCase();
+
+            if (password === 'rojo') {
+                window.location.href = 'rojo.html';
+            } else if (password === 'morado') {
+                window.location.href = 'morado.html';
+            } else if (password === 'azul') {
+                window.location.href = 'azul.html';
+            } else {
+                alert('Contraseña incorrecta');
+            }
+        });
+    </script>
+</body>
+</html>

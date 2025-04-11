@@ -1,0 +1,118 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 50%; /* Reducir el tamaño para centrarlos mejor */
+  margin: 0 auto;
+  padding-top: 2rem;
+  text-align: center; /* Centrar el contenido */
+}
+
+.titulo {
+  color: #fff;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.tabs {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+button {
+  padding: 10px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+input[type="text"] {
+  padding: 10px;
+  margin-bottom: 1rem;
+  width: 80%; /* Reducir el tamaño de los inputs */
+  border: 1px solid #444;
+  background-color: #222;
+  color: #fff;
+  border-radius: 5px;
+}
+
+input[type="password"], input[type="text"] {
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+  outline: none;
+  border-color: #00f2ff;
+}
+
+.tabla-container {
+  background: #222;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 2rem;
+  box-shadow: 0 0 20px #00f2ff88;
+  margin-bottom: 2rem; /* Añadir espacio debajo */
+}
+
+#tabla-puntajes {
+  width: 80%; /* Ajustar el tamaño de la tabla */
+  border-collapse: collapse;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+#tabla-puntajes th, #tabla-puntajes td {
+  border: 1px solid #ffffff44;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+#tabla-puntajes th {
+  background-color: #00f2ff33;
+  color: #00f2ff;
+}
+
+.rojo {
+  background-color: black;
+  background: linear-gradient(to right, black, #a40000);
+}
+
+.morado {
+  background-color: black;
+  background: linear-gradient(to right, black, #580162);
+}
+
+.azul {
+  background-color: black;
+  background: linear-gradient(to right, black, #0044a2);
+}
+
+.flags {
+  margin-top: 2rem;
+}
+
+.flags input[type="text"] {
+  width: 80%; /* Centrar los inputs */
+  margin: 10px 0; /* Agregar más espacio entre los campos */
+}
+
+.flags button {
+  width: 50%; /* Asegurarse de que los botones estén alineados con los inputs */
+  margin-top: 10px;
+  margin-bottom: 45px; /* Agregar espacio debajo de los botones */
+}
