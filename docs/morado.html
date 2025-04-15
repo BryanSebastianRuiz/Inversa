@@ -48,26 +48,30 @@
       </form>
     </div>
 
+    <!-- Puedes poner esto en rojo.html o donde sea -->
+<button onclick="redirigirChat()">💬 Ir al Chat del Equipo</button>
+
+<script>
+function redirigirChat() {
+  const equipo = document.body.dataset.equipo;
+  if (equipo === "Rojo") {
+    window.location.href = "chat_rojo.html";
+  } else if (equipo === "Morado") {
+    window.location.href = "chat_morado.html";
+  } else if (equipo === "Azul") {
+    window.location.href = "chat_azul.html";
+  } else {
+    alert("Equipo no reconocido.");
+  }
+}
+</script>
+
+
     <div style="margin-top: 20px;">
       <button onclick="window.location.href='scoreboard.html'" style="padding: 10px 20px; font-size: 16px;">
         🏆 Ver Scoreboard
       </button>
     </div>
-
-    <script>
-      if (localStorage.getItem("modoAdmin") === "true") {
-          // Mostrar el panel admin
-          const adminPanel = document.createElement('div');
-          adminPanel.innerHTML = `
-              <div id="admin-panel" style="margin-top: 30px; padding: 10px;">
-                  <h3>Panel Administrativo</h3>
-                  <button onclick="borrarRespuestas()">🗑️ Borrar Respuestas</button>
-                  <button onclick="reiniciarPuntajes()">🔄 Reiniciar Puntajes</button>
-              </div>
-          `;
-          document.querySelector('.container').appendChild(adminPanel);
-      }
-  </script>
 
   <!-- === ORDEN DE SCRIPTS CRÍTICO === -->
   <!-- 1. Configuración Global -->

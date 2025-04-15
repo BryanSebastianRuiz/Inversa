@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Rojo</title>
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+<body class="chat rojo" data-equipo="Rojo">
+
+  <div class="container">
+    <h1>Chat del Equipo Rojo 🔴</h1>
+
+    <div id="chat-box" style="height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;"></div>
+
+    <form id="chat-form" onsubmit="return false;">
+      <input type="text" id="chat-input" placeholder="Escribe tu mensaje" autocomplete="off">
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <!-- Scripts necesarios -->
+  <script src="scripts/config.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+  <script src="scripts/firebase-init.js"></script>
+  <script src="scripts/chat.js"></script>
+
+</body>
+</html>
