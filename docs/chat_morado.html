@@ -2,52 +2,30 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Chat Equipo Morado</title>
+  <title>Chat Rojo</title>
   <link rel="stylesheet" href="styles/style.css">
-  <style>
-    body { background-color: #ffdddd; font-family: sans-serif; }
-    .chat-container { max-width: 600px; margin: auto; padding: 20px; }
-    .mensaje { margin: 5px 0; padding: 10px; background: #fff; border-radius: 8px; }
-    .mensaje strong { color: #aa0000; }
-  </style>
 </head>
-<body>
-  <div class="chat-container">
-    <h2>Chat del Equipo Rojo</h2>
-    <div id="chat-mensajes"></div>
-    <input type="text" id="mensaje" placeholder="Escribe un mensaje..." />
-    <button onclick="enviarMensaje()">Enviar</button>
+<body class="chat morado" data-equipo="Morado">
+
+  <div class="container">
+    <h1>Chat del Equipo Morado 🟣</h1>
+
+    <div id="chat-box" style="height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;"></div>
+
+    <form id="chat-form" onsubmit="return false;">
+      <input type="text" id="chat-input" placeholder="Escribe tu mensaje" autocomplete="off">
+      <button type="submit">Enviar</button>
+    </form>
   </div>
+
+  <!-- Scripts necesarios -->
+  <script src="scripts/config.js"></script>
 
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
   <script src="scripts/firebase-init.js"></script>
-  <script>
-    const equipo = "Morado"; // Cambiar según el equipo
-    const db = firebase.database();
-    const mensajesRef = db.ref(`chats/${equipo}`);
+  <script src="scripts/chat.js"></script>
 
-    // Mostrar mensajes
-    mensajesRef.on("child_added", (snapshot) => {
-      const datos = snapshot.val();
-      const div = document.createElement("div");
-      div.className = "mensaje";
-      div.innerHTML = `<strong>${datos.usuario || "Anónimo"}:</strong> ${datos.texto}`;
-      document.getElementById("chat-mensajes").appendChild(div);
-    });
-
-    function enviarMensaje() {
-      const input = document.getElementById("mensaje");
-      const texto = input.value.trim();
-      if (texto) {
-        mensajesRef.push({
-          usuario: "Jugador", // Puedes personalizar con nombre del jugador
-          texto: texto,
-          timestamp: Date.now()
-        });
-        input.value = "";
-      }
-    }
-  </script>
 </body>
 </html>

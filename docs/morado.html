@@ -66,14 +66,12 @@ function redirigirChat() {
 }
 </script>
 
-
     <div style="margin-top: 20px;">
       <button onclick="window.location.href='scoreboard.html'" style="padding: 10px 20px; font-size: 16px;">
         🏆 Ver Scoreboard
       </button>
     </div>
 
-  <!-- === ORDEN DE SCRIPTS CRÍTICO === -->
   <!-- 1. Configuración Global -->
   <script src="scripts/config.js"></script>
 
@@ -87,6 +85,9 @@ function redirigirChat() {
   <!-- 4. Scripts que USAN Firebase -->
   <script src="scripts/equipo.js"></script> <!-- Lógica de flags -->
   <script src="scripts/tabla.js"></script>  <!-- Lógica de mostrar tabla -->
+
+    <!-- Controles de Admin -->
+    <script src="scripts/admin.js"></script>
 
 </body>
 </html>
