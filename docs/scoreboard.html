@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Marcador Global CTF</title>
+  <style>
+    /* Colores base en RGB */
+    :root {
+      --color-rojo-base: 164, 0, 0;
+      --color-morado-base: 88, 1, 98;
+      --color-azul-base: 0, 68, 162;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #e0e0e0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fondo difuminado dinámico según líder */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: transparent;
+      opacity: 0;
+      transition: background 1s ease-in-out, opacity 1s ease-in-out;
+      z-index: -1;
+    }
+
+    body[data-leader="Rojo"]::before {
+      background: radial-gradient(circle at center, rgba(var(--color-rojo-base), 0.5) 0%, rgba(var(--color-rojo-base), 0.1) 100%);
+      opacity: 1;
+    }
+
+    body[data-leader="Morado"]::before {
+      background: radial-gradient(circle at center, rgba(var(--color-morado-base), 0.5) 0%, rgba(var(--color-morado-base), 0.1) 100%);
+      opacity: 1;
+    }
+
+    body[data-leader="Azul"]::before {
+      background: radial-gradient(circle at center, rgba(var(--color-azul-base), 0.5) 0%, rgba(var(--color-azul-base), 0.1) 100%);
+      opacity: 1;
+    }
+
+    .container {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px 40px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 25px rgba(0, 191, 255, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      color: #fff;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    #global-score-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      color: #e0e0e0;
+    }
+
+    #global-score-table th, #global-score-table td {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px;
+      text-align: left;
+    }
+
+    #global-score-table th {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    #global-score-table td:last-child {
+      text-align: right;
+      font-weight: bold;
+      min-width: 60px;
+    }
+
+    #loading-message {
+      margin-top: 20px;
+      color: #aaa;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Marcador Global CTF</h1>
+    <table id="global-score-table">
+      <thead>
+        <tr>
+          <th>Equipo</th>
+          <th>Puntaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Las filas se generan dinámicamente por tabla.js -->
+      </tbody>
+    </table>
+    <p id="loading-message">Cargando puntajes...</p>
+  </div>
+
+  <!-- Firebase y scripts -->
+  <script src="scripts/config.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+  <script src="scripts/firebase-init.js"></script>
+
+  <!-- Adaptado scoreboard.js para actualizar data-leader -->
+  <script>
+    if (typeof firebase === 'undefined' || typeof firebase.app !== 'function' || !firebase.apps.length) {
+      console.error("¡ERROR CRÍTICO! Firebase no inicializado antes de scoreboard.js.");
+    } else {
+      const loadingMessage = document.getElementById('loading-message');
+
+      window.actualizarColorFondoScoreboard = function(scores) {
+        let scoreData = [
+          { equipo: 'Rojo', puntaje: scores.Rojo || 0 },
+          { equipo: 'Morado', puntaje: scores.Morado || 0 },
+          { equipo: 'Azul', puntaje: scores.Azul || 0 }
+        ];
+
+        scoreData.sort((a, b) => b.puntaje - a.puntaje);
+
+        let leaderTeam = null;
+        if (scoreData.length > 0 && scoreData[0].puntaje > 0) {
+          if (scoreData.length > 1 && scoreData[0].puntaje === scoreData[1].puntaje) {
+            leaderTeam = null; // Empate
+          } else {
+            leaderTeam = scoreData[0].equipo;
+          }
+        }
+
+        document.body.dataset.leader = leaderTeam || '';
+        console.log(`Scoreboard: Atributo data-leader actualizado a "${document.body.dataset.leader}"`);
+      };
+
+      window.addEventListener('DOMContentLoaded', () => {
+        if (loadingMessage) loadingMessage.style.display = 'none';
+      });
+    }
+  </script>
+
+  <script src="scripts/tabla.js"></script>
+</body>
+</html>

@@ -1,52 +1,89 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Equipo Rojo - CTF Virtual</title>
-    <link rel="stylesheet" href="styles/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipo Rojo - CTF Virtual</title>
+  <link rel="stylesheet" href="styles/style.css">
 </head>
-<body class="rojo">
-    <div class="container">
-        <h1 class="titulo">Equipo Rojo</h1>
-        <div class="tabla-container">
-            <h2>Tabla de Puntajes</h2>
-            <table id="tabla-puntajes"></table>
+
+<body class="rojo" data-equipo="Rojo">
+  <div class="container">
+    <h1 class="titulo">Equipo Rojo</h1>
+
+    <div class="flags">
+      <h2>Ingresar Flags</h2>
+      <form id="flagForm" onsubmit="return false;">
+        <!-- Flags 1 a 5 -->
+        <div>
+          <label for="flag1">Flag 1:</label><br>
+          <input type="text" id="flag1"><br>
+          <button type="button" id="btn-flag1" class="flag-btn">Verificar Flag 1</button><br>
+          <span id="flag1-resultado"></span><br><br>
         </div>
-
-        <div class="flags">
-            <h2>Ingresar Flags</h2>
-            <form id="flagForm">
-                <label for="flag1">Flag 1:</label><br>
-                <input type="text" id="flag1"><br>
-                <button type="button" id="btn-flag1" class="flag-btn">Verificar Flag 1</button><br>
-                <span id="flag1-resultado"></span><br><br>
-
-                <label for="flag2">Flag 2:</label><br>
-                <input type="text" id="flag2"><br>
-                <button type="button" id="btn-flag2" class="flag-btn">Verificar Flag 2</button><br>
-                <span id="flag2-resultado"></span><br><br>
-
-                <label for="flag3">Flag 3:</label><br>
-                <input type="text" id="flag3"><br>
-                <button type="button" id="btn-flag3" class="flag-btn">Verificar Flag 3</button><br>
-                <span id="flag3-resultado"></span><br><br>
-
-                <label for="flag4">Flag 4:</label><br>
-                <input type="text" id="flag4"><br>
-                <button type="button" id="btn-flag4" class="flag-btn">Verificar Flag 4</button><br>
-                <span id="flag4-resultado"></span><br><br>
-
-                <label for="flag5">Flag 5:</label><br>
-                <input type="text" id="flag5"><br>
-                <button type="button" id="btn-flag5" class="flag-btn">Verificar Flag 5</button><br>
-                <span id="flag5-resultado"></span><br><br>
-            </form>
+        <div>
+          <label for="flag2">Flag 2:</label><br>
+          <input type="text" id="flag2"><br>
+          <button type="button" id="btn-flag2" class="flag-btn">Verificar Flag 2</button><br>
+          <span id="flag2-resultado"></span><br><br>
         </div>
+        <div>
+          <label for="flag3">Flag 3:</label><br>
+          <input type="text" id="flag3"><br>
+          <button type="button" id="btn-flag3" class="flag-btn">Verificar Flag 3</button><br>
+          <span id="flag3-resultado"></span><br><br>
+        </div>
+        <div>
+          <label for="flag4">Flag 4:</label><br>
+          <input type="text" id="flag4"><br>
+          <button type="button" id="btn-flag4" class="flag-btn">Verificar Flag 4</button><br>
+          <span id="flag4-resultado"></span><br><br>
+        </div>
+        <div>
+          <label for="flag5">Flag 5:</label><br>
+          <input type="text" id="flag5"><br>
+          <button type="button" id="btn-flag5" class="flag-btn">Verificar Flag 5</button><br>
+          <span id="flag5-resultado"></span><br><br>
+        </div>
+      </form>
     </div>
 
-    <script src="scripts/rojo.js"></script>
-    <script src="scripts/tabla.js"></script>
-    <script src="scripts/puntosr.js"></script>
+    <div style="margin-top: 20px;">
+      <button onclick="window.location.href='scoreboard.html'" style="padding: 10px 20px; font-size: 16px;">
+        🏆 Ver Scoreboard
+      </button>
+    </div>
+
+    <script>
+      if (localStorage.getItem("modoAdmin") === "true") {
+          // Mostrar el panel admin
+          const adminPanel = document.createElement('div');
+          adminPanel.innerHTML = `
+              <div id="admin-panel" style="margin-top: 30px; padding: 10px;">
+                  <h3>Panel Administrativo</h3>
+                  <button onclick="borrarRespuestas()">🗑️ Borrar Respuestas</button>
+                  <button onclick="reiniciarPuntajes()">🔄 Reiniciar Puntajes</button>
+              </div>
+          `;
+          document.querySelector('.container').appendChild(adminPanel);
+      }
+  </script>
+
+  <!-- === ORDEN DE SCRIPTS CRÍTICO === -->
+  <script src="scripts/config.js"></script>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+  <!-- Inicialización -->
+  <script src="scripts/firebase-init.js"></script>
+
+  <!-- Funcionalidad -->
+  <script src="scripts/equipo.js"></script>
+  <script src="scripts/tabla.js"></script>
+
+  <!-- Controles de Admin -->
+  <script src="scripts/admin.js"></script>
 </body>
 </html>

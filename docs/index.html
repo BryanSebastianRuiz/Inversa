@@ -20,9 +20,18 @@
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            var password = document.getElementById('password').value.toLowerCase();
-
-            if (password === 'rojo') {
+            const password = document.getElementById('password').value.toLowerCase();
+    
+            if (password === 'admin') {
+                const adminPass = prompt("Ingrese la contraseña de administrador:");
+    
+                if (adminPass === '1234admin') { // Puedes cambiar esta clave
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    alert("Contraseña de administrador incorrecta.");
+                }
+    
+            } else if (password === 'rojo') {
                 window.location.href = 'rojo.html';
             } else if (password === 'morado') {
                 window.location.href = 'morado.html';
@@ -33,5 +42,6 @@
             }
         });
     </script>
+    
 </body>
 </html>
