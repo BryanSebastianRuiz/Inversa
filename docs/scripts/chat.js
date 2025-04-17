@@ -13,12 +13,27 @@ if (typeof firebase === 'undefined' || !firebase.apps.length) {
     const equipo = document.body.dataset.equipo;
     const chatRef = db.ref(`chats/${equipo}`);
 
+    function escapeHTML(texto) {
+        return texto.replace(/[&<>"']/g, function (m) {
+            return {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            }[m];
+        });
+    }
+    
     function agregarMensajeAlChat(nombre, mensaje) {
         const p = document.createElement('p');
-        p.innerHTML = `<strong>${nombre}:</strong> ${mensaje}`;
+        const safeNombre = escapeHTML(nombre);
+        const safeMensaje = escapeHTML(mensaje);
+        p.innerHTML = `<strong>${safeNombre}:</strong> ${safeMensaje}`;
         chatBox.appendChild(p);
         chatBox.scrollTop = chatBox.scrollHeight;
     }
+    
 
     // Escuchar mensajes nuevos
     chatRef.on('child_added', snapshot => {

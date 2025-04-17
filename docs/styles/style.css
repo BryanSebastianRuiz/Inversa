@@ -7,10 +7,10 @@ body {
 }
 
 .container {
-  width: 50%; /* Reducir el tamaño para centrarlos mejor */
+  width: 50%;
   margin: 0 auto;
   padding-top: 2rem;
-  text-align: center; /* Centrar el contenido */
+  text-align: center;
 }
 
 .titulo {
@@ -41,7 +41,7 @@ button:hover {
 input[type="text"] {
   padding: 10px;
   margin-bottom: 1rem;
-  width: 80%; /* Reducir el tamaño de los inputs */
+  width: 80%;
   border: 1px solid #444;
   background-color: #222;
   color: #fff;
@@ -66,11 +66,11 @@ input[type="text"]:focus, input[type="password"]:focus {
   border-radius: 10px;
   margin-top: 2rem;
   box-shadow: 0 0 20px #00f2ff88;
-  margin-bottom: 2rem; /* Añadir espacio debajo */
+  margin-bottom: 2rem;
 }
 
 #tabla-puntajes {
-  width: 80%; /* Ajustar el tamaño de la tabla */
+  width: 80%;
   border-collapse: collapse;
   margin: 0 auto;
   margin-top: 1rem;
@@ -107,12 +107,48 @@ input[type="text"]:focus, input[type="password"]:focus {
 }
 
 .flags input[type="text"] {
-  width: 80%; /* Centrar los inputs */
-  margin: 10px 0; /* Agregar más espacio entre los campos */
+  width: 80%;
+  margin: 10px 0;
 }
 
 .flags button {
-  width: 50%; /* Asegurarse de que los botones estén alineados con los inputs */
+  width: 50%;
   margin-top: 10px;
-  margin-bottom: 45px; /* Agregar espacio debajo de los botones */
+  margin-bottom: 45px;
+}
+
+/* --------------------------- */
+/* RESPONSIVE DESIGN SECTION  */
+/* --------------------------- */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .titulo {
+    font-size: 2rem;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+  }
+
+  #tabla-puntajes {
+    width: 100%;
+  }
+
+  .flags input[type="text"] {
+    width: 100%;
+  }
+
+  .flags button {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
 }

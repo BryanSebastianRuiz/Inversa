@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CTF Virtual - Página Principal</title>
   <link rel="stylesheet" href="styles/in.css">
 </head>
 <body>
   <div class="container">
+    <img src="img/imagen1.png" alt="CTF Logo" class="logo" width="350" height="280">
     <h1>Bienvenidos al CTF Virtual</h1>
     <p>Ingrese su nickname y contraseña para acceder al equipo.</p>
     <form id="loginForm">
@@ -23,7 +24,7 @@
   </div>
 
   <script>
-    // Nuevas contraseñas por equipo
+    // Mapeo de contraseñas seguras a equipos
     const contraseñasEquipos = {
       redteam2025: 'rojo',
       purpleforce2025: 'morado',
@@ -32,44 +33,83 @@
 
     const contraseñas = Object.keys(contraseñasEquipos);
 
+    // Función para validar nickname
+    function esNicknameValido(nick) {
+      const regex = /^[a-zA-Z0-9_-]{3,20}$/;
+      return regex.test(nick);
+    }
+
+    // Prevenir XSS
+    function escapeHTML(texto) {
+      return texto.replace(/[&<>"']/g, (m) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      })[m]);
+    }
+
     document.getElementById('randomBtn').addEventListener('click', () => {
-      const nickname = document.getElementById('nickname').value.trim();
+      let nickname = document.getElementById('nickname').value.trim();
+
       if (!nickname) {
         alert('Primero ingresa un nickname.');
         return;
       }
 
-      // Elegir una contraseña aleatoria
+      if (!esNicknameValido(nickname)) {
+        alert('El nickname solo puede contener letras, números, guiones y guiones bajos (3-20 caracteres).');
+        return;
+      }
+
+      nickname = escapeHTML(nickname);
+
       const contraseñaAleatoria = contraseñas[Math.floor(Math.random() * contraseñas.length)];
       const equipoAleatorio = contraseñasEquipos[contraseñaAleatoria];
 
-      // Mostrar la contraseña generada al usuario
       alert(`Tu contraseña aleatoria es: ${contraseñaAleatoria}`);
+      document.getElementById('password').value = contraseñaAleatoria;
 
-      // Guardar nickname y equipo
       localStorage.setItem('nickname', nickname);
       localStorage.setItem('equipo', equipoAleatorio);
     });
 
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      const password = document.getElementById('password').value.trim();
-      const nickname = document.getElementById('nickname').value.trim();
+      let password = document.getElementById('password').value.trim();
+      let nickname = document.getElementById('nickname').value.trim();
 
       if (!nickname) {
         alert('Por favor ingresa un nickname.');
         return;
       }
 
+      if (!esNicknameValido(nickname)) {
+        alert('El nickname solo puede contener letras, números, guiones y guiones bajos (3-20 caracteres).');
+        return;
+      }
+
+      nickname = escapeHTML(nickname);
+
       if (contraseñasEquipos[password]) {
         const equipo = contraseñasEquipos[password];
+
         localStorage.setItem('nickname', nickname);
         localStorage.setItem('equipo', equipo);
+
         window.location.href = `${equipo}.html`;
       } else {
         alert('Contraseña incorrecta');
       }
     });
+
+    // Protección mínima contra inspección con DevTools
+    setInterval(() => {
+      if (window.outerHeight - window.innerHeight > 100 || window.outerWidth - window.innerWidth > 100) {
+        console.warn("⚠️ DevTools puede estar abierto. No manipules el sitio.");
+      }
+    }, 1000);
   </script>
 </body>
 </html>
